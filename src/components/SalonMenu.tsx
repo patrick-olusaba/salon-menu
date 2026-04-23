@@ -11,24 +11,55 @@ export default function SalonMenu() {
       {/* ── Hero ── */}
       {!activeCategory && (
         <section className="hero" aria-label="Services hero">
-          <img src={heroImg} alt="" className="hero-bg" aria-hidden="true" />
+          <img src={heroImg} alt="Master Stylists Salon" className="hero-bg" aria-hidden="true" />
           <div className="hero-overlay" aria-hidden="true" />
           <div className="hero-content">
-            <p className="hero-eyebrow">Master Stylists Salon & Barbershop</p>
+            <p className="hero-eyebrow">Valley Arcade Mini Mall · Nairobi</p>
             <h1 className="hero-title">
-              Where Every Visit Leaves<br />
-              <em>a Lasting Impression</em>
+              Look Good.<br />
+              <em>Feel Unstoppable.</em>
             </h1>
             <p className="hero-sub">
-              Premium salon and barbershop services crafted for you.<br />
-              Select a category below to explore our offerings and pricing.
+              Nairobi's go-to salon & barbershop for cuts, braids, color,<br />
+              nails, facials and more — all under one roof.
             </p>
+            <div className="hero-actions">
+              <a
+                href="#services"
+                className="hero-btn-primary"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                Explore Services
+              </a>
+              <a href={`tel:${CONTACT.phone}`} className="hero-btn-secondary">
+                Call to Book
+              </a>
+            </div>
+            <div className="hero-badges">
+              <div className="hero-badge">
+                <span className="hero-badge-num">11+</span>
+                <span className="hero-badge-label">Service Categories</span>
+              </div>
+              <div className="hero-badge-divider" />
+              <div className="hero-badge">
+                <span className="hero-badge-num">5★</span>
+                <span className="hero-badge-label">Client Rated</span>
+              </div>
+              <div className="hero-badge-divider" />
+              <div className="hero-badge">
+                <span className="hero-badge-num">Walk-ins</span>
+                <span className="hero-badge-label">Always Welcome</span>
+              </div>
+            </div>
           </div>
         </section>
       )}
 
       {/* ── Services ── */}
-      <section className="section">
+      <section className="section" id="services">
         <div className="container">
           {!activeCategory ? (
             <>
