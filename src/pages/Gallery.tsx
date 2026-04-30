@@ -11,7 +11,6 @@ type ImageModule = { default: string };
 
 const photos = Object.entries(imageModules).map(([path, mod]) => {
   const filename = path.split("/").pop() ?? "";
-  // Turn filename into a readable label: "fade-cut-jan.jpg" → "Fade Cut Jan"
   const label = filename
     .replace(/\.[^.]+$/, "")
     .replace(/[-_]/g, " ")
@@ -44,8 +43,8 @@ export default function Gallery() {
             <h2 className="section-title">Recent Work</h2>
             <p className="section-sub">
               {hasPhotos
-                ? `${photos.length} photo${photos.length !== 1 ? "s" : ""} — drop more into src/assets/gallery/ to add`
-                : "Add your photos to showcase your best looks"}
+                ? `${photos.length} photo${photos.length !== 1 ? "s" : ""}`
+                : "Photos coming soon"}
             </p>
           </div>
 

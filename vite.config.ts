@@ -5,6 +5,13 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    host:true,
-  }
+    host: true,
+    proxy: {
+      '/storage-proxy': {
+        target: 'https://firebasestorage.googleapis.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/storage-proxy/, ''),
+      },
+    },
+  },
 })

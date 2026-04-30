@@ -10,8 +10,8 @@ export default function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<SalonMenu />} />
-          <Route path="gallery" element={<Gallery />} />
           <Route path="products" element={<Products />} />
+          <Route path="gallery" element={<Gallery />} />
         </Route>
       </Routes>
     </BrowserRouter>
