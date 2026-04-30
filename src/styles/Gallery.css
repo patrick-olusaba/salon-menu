@@ -105,3 +105,175 @@
 @media (max-width: 480px) {
   .gallery-grid { columns: 1; }
 }
+
+/* ─── Before & After ────────────────────────────────────────── */
+.ba-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(560px, 1fr));
+  gap: 24px;
+}
+
+.ba-card {
+  display: flex;
+  align-items: stretch;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: #101012;
+  transition: box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.ba-card:hover {
+  border-color: rgba(184,150,90,0.22);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+}
+
+.ba-side {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-height: 260px;
+}
+
+.ba-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.ba-card:hover .ba-img {
+  transform: scale(1.04);
+}
+
+.ba-label {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-family: 'Inter', system-ui, sans-serif;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.ba-label--before {
+  background: rgba(10,10,11,0.72);
+  color: rgba(242,236,227,0.75);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.ba-label--after {
+  background: rgba(184,150,90,0.85);
+  color: #0a0a0b;
+  border: 1px solid rgba(184,150,90,0.5);
+}
+
+.ba-divider {
+  width: 2px;
+  background: rgba(255,255,255,0.10);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.ba-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #101012;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* ─── Responsive ────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .ba-grid {
+    grid-template-columns: 1fr;
+  }
+  .ba-side {
+    min-height: 180px;
+  }
+}
+
+/* ─── Before & After ────────────────────────────────────────── */
+.ba-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(560px, 1fr));
+  gap: 20px;
+}
+
+.ba-card {
+  display: flex;
+  align-items: stretch;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  transition: border-color var(--transition), transform var(--transition);
+}
+
+.ba-card:hover {
+  border-color: var(--border-mid);
+  transform: translateY(-3px);
+}
+
+.ba-side {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+}
+
+.ba-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+}
+
+.ba-card:hover .ba-img { transform: scale(1.04); }
+
+.ba-label {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.ba-label--before {
+  background: rgba(10,10,11,0.75);
+  color: rgba(242,236,227,0.7);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.ba-label--after {
+  background: rgba(184,150,90,0.85);
+  color: #0a0a0b;
+  border: 1px solid transparent;
+}
+
+.ba-divider {
+  width: 2px;
+  background: var(--bg);
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .ba-grid { grid-template-columns: 1fr; }
+}

@@ -54,7 +54,7 @@ export default function Products() {
                 <div className="product-footer">
                   <span className="product-price">{product.price}</span>
                   <a href={`tel:${CONTACT.phone}`} className="product-enquire">
-                    Enquire →
+                    Buy Now →
                   </a>
                 </div>
               </div>

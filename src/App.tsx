@@ -3,6 +3,7 @@ import Layout from "./components/Layout";
 import SalonMenu from "./components/SalonMenu";
 import Gallery from "./pages/Gallery";
 import Products from "./pages/Products";
+import Booking from "./pages/Booking";
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
           <Route index element={<SalonMenu />} />
           <Route path="products" element={<Products />} />
           <Route path="gallery" element={<Gallery />} />
+          <Route path="booking" element={<Booking />} />
         </Route>
       </Routes>
     </BrowserRouter>

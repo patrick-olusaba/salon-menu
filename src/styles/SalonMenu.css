@@ -1053,3 +1053,387 @@ a.footer-col-item:hover { color: var(--text-secondary); }
   .hero-badges { flex-wrap: wrap; border-radius: 14px; justify-content: center; }
   .hero-badge-divider { display: none; }
 }
+
+/* ─── WhatsApp Floating Button ──────────────────────────────── */
+.whatsapp-fab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 999;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+  text-decoration: none;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  animation: wa-pulse 2.4s ease-in-out infinite;
+}
+
+.whatsapp-fab svg {
+  width: 30px;
+  height: 30px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.whatsapp-fab:hover {
+  background: #1ebe5d;
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(37,211,102,0.6);
+  animation: none;
+}
+
+@keyframes wa-pulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.45); }
+  50%       { box-shadow: 0 4px 32px rgba(37,211,102,0.75), 0 0 0 10px rgba(37,211,102,0.12); }
+}
+
+@media (max-width: 480px) {
+  .whatsapp-fab {
+    bottom: 20px;
+    right: 16px;
+    width: 52px;
+    height: 52px;
+  }
+  .whatsapp-fab svg { width: 26px; height: 26px; }
+}
+
+/* ─── Opening Hours Status Badge ────────────────────────────── */
+.hero-status-row {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--sans);
+  letter-spacing: 0.06em;
+  padding: 7px 16px;
+  border-radius: 50px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.hero-status-badge--open {
+  background: rgba(37,211,102,0.12);
+  border: 1px solid rgba(37,211,102,0.3);
+  color: #4ade80;
+}
+
+.hero-status-badge--closed {
+  background: rgba(239,68,68,0.10);
+  border: 1px solid rgba(239,68,68,0.25);
+  color: #f87171;
+}
+
+.hero-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.hero-status-badge--open .hero-status-dot {
+  background: #4ade80;
+  box-shadow: 0 0 0 3px rgba(74,222,128,0.25);
+  animation: status-pulse 2s ease-in-out infinite;
+}
+
+.hero-status-badge--closed .hero-status-dot {
+  background: #f87171;
+}
+
+@keyframes status-pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(74,222,128,0.25); }
+  50%       { box-shadow: 0 0 0 6px rgba(74,222,128,0.08); }
+}
+
+/* ─── Testimonials ──────────────────────────────────────────── */
+.testimonials-section {
+  margin-top: 80px;
+  padding-top: 64px;
+  border-top: 1px solid var(--border);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.testimonial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.testimonial-card:hover {
+  border-color: var(--gold-border);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.35);
+}
+
+.testimonial-stars {
+  display: flex;
+  gap: 4px;
+}
+
+.testimonial-star {
+  color: var(--gold);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.testimonial-text {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-primary);
+  line-height: 1.65;
+  flex: 1;
+}
+
+.testimonial-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  gap: 12px;
+}
+
+.testimonial-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.03em;
+}
+
+.testimonial-service {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-border);
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .testimonial-card {
+    padding: 22px 20px 18px;
+  }
+  .testimonial-text {
+    font-size: 15px;
+  }
+}
+
+/* ─── Hero Status Badge ─────────────────────────────────────── */
+.hero-status-row {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  padding: 7px 16px;
+  border-radius: 30px;
+  background: rgba(10,10,11,0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.1);
+  font-family: var(--sans);
+}
+
+.hero-status-badge--open  { color: #4ade80; border-color: rgba(74,222,128,0.25); }
+.hero-status-badge--closed { color: #f87171; border-color: rgba(248,113,113,0.25); }
+
+.hero-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.hero-status-badge--open  .hero-status-dot { background: #4ade80; box-shadow: 0 0 6px #4ade80; }
+.hero-status-badge--closed .hero-status-dot { background: #f87171; }
+
+/* ─── Testimonials ──────────────────────────────────────────── */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.testimonial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color var(--transition), transform var(--transition);
+}
+
+.testimonial-card:hover {
+  border-color: var(--border-mid);
+  transform: translateY(-3px);
+}
+
+.testimonial-stars { display: flex; gap: 4px; }
+
+.testimonial-star {
+  color: var(--gold);
+  font-size: 12px;
+}
+
+.testimonial-text {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-primary);
+  line-height: 1.65;
+  flex: 1;
+}
+
+.testimonial-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.testimonial-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+}
+
+.testimonial-service {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-border);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+/* ─── WhatsApp FAB ──────────────────────────────────────────── */
+.whatsapp-fab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 200;
+  width: 56px;
+  height: 56px;
+  background: #25d366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  transition: transform var(--transition), box-shadow var(--transition);
+  text-decoration: none;
+}
+
+.whatsapp-fab svg {
+  width: 28px;
+  height: 28px;
+  color: #fff;
+}
+
+.whatsapp-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(37,211,102,0.55);
+}
+
+.whatsapp-fab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #25d366;
+  animation: wa-pulse 2.2s ease-out infinite;
+  z-index: -1;
+}
+
+@keyframes wa-pulse {
+  0%   { transform: scale(1); opacity: 0.6; }
+  70%  { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+@media (max-width: 768px) {
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .whatsapp-fab { bottom: 20px; right: 20px; width: 50px; height: 50px; }
+  .whatsapp-fab svg { width: 24px; height: 24px; }
+}
+
+/* ─── Service card as link ──────────────────────────────────── */
+a.service-card {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.service-book-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #25d366;
+  font-family: var(--sans);
+  transition: color var(--transition);
+}
+
+.service-wa-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+a.service-card:hover .service-book-hint {
+  color: #1ebe5d;
+}
