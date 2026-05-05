@@ -1512,3 +1512,11 @@ a.service-card:hover .service-book-hint {
   border-color: var(--gold-border);
   background: var(--gold-dim);
 }
+
+/* ── Light theme: hero less dark ── */
+[data-theme="light"] .hero-bg {
+  filter: brightness(0.80) saturate(0.95);
+}
+[data-theme="light"] .hero-overlay {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.45) 100%);
+}
