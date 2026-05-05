@@ -1,6 +1,35 @@
-import { useState } from "react";
-import { categories, CONTACT } from "../data/salonData";
+﻿import { useState } from "react";
+import { categories, CONTACT, type Category } from "../data/salonData";
 import heroImg from "../assets/hero.png";
+
+// ── Duration range for category cards ───────────────────────────
+function durationRange(cat: Category): string {
+  const mins: number[] = [];
+  for (const svc of cat.services) {
+    if (!svc.duration) continue;
+    const m = svc.duration.match(/\d+/g);
+    if (m) mins.push(...m.map(Number));
+  }
+  if (!mins.length) return "";
+  const lo = Math.min(...mins), hi = Math.max(...mins);
+  return lo === hi ? `${lo} min` : `${lo}–${hi} min`;
+}
+
+// ── Share a service ──────────────────────────────────────────────
+async function shareService(name: string, price: string, e: React.MouseEvent) {
+  e.preventDefault();
+  e.stopPropagation();
+  const text = `${name} — ${price} | Master Stylists Salon, Nairobi`;
+  if (navigator.share) {
+    await navigator.share({ title: name, text, url: window.location.href }).catch(() => {});
+  } else {
+    await navigator.clipboard.writeText(text).catch(() => {});
+    const btn = e.currentTarget as HTMLButtonElement;
+    const orig = btn.textContent;
+    btn.textContent = "Copied!";
+    setTimeout(() => { btn.textContent = orig; }, 1800);
+  }
+}
 
 // ── Opening hours helper (Nairobi = UTC+3) ──────────────────────
 function getOpenStatus(): { open: boolean; label: string } {
@@ -114,36 +143,40 @@ export default function SalonMenu() {
               </div>
 
               <div className="grid">
-                {categories.map((cat) => (
-                  <button
-                    key={cat.id}
-                    onClick={() => setActiveCategory(cat.id)}
-                    className="category-card"
-                    aria-label={`View ${cat.title} services`}
-                    style={{
-                      "--accent-color": cat.accent,
-                      "--icon-bg": `${cat.accent}14`,
-                      "--icon-bg-hover": `${cat.accent}26`,
-                    } as React.CSSProperties}
-                  >
-                    <div className="card-image-wrap">
-                      <img src={cat.image} alt={cat.title} className="card-image" />
-                      <div className="card-image-overlay" />
-                      <span className="card-count-badge">{cat.services.length}</span>
-                    </div>
-                    <div className="card-body">
-                      <div className="card-top">
-                        <div className="card-icon-wrap">{cat.icon}</div>
+                {categories.map((cat) => {
+                  const range = durationRange(cat);
+                  return (
+                    <button
+                      key={cat.id}
+                      onClick={() => setActiveCategory(cat.id)}
+                      className="category-card"
+                      aria-label={`View ${cat.title} services`}
+                      style={{
+                        "--accent-color": cat.accent,
+                        "--icon-bg": `${cat.accent}14`,
+                        "--icon-bg-hover": `${cat.accent}26`,
+                      } as React.CSSProperties}
+                    >
+                      <div className="card-image-wrap">
+                        <img src={cat.image} alt={cat.title} className="card-image" />
+                        <div className="card-image-overlay" />
+                        <span className="card-count-badge">{cat.services.length}</span>
                       </div>
-                      <h3 className="card-title">{cat.title}</h3>
-                      <p className="card-sub">{cat.subtitle}</p>
-                      <div className="card-footer">
-                        <span className="card-footer-label">View services</span>
-                        <span className="card-count-arrow">→</span>
+                      <div className="card-body">
+                        <div className="card-top">
+                          <div className="card-icon-wrap">{cat.icon}</div>
+                          {range && <span className="card-duration">⏱ {range}</span>}
+                        </div>
+                        <h3 className="card-title">{cat.title}</h3>
+                        <p className="card-sub">{cat.subtitle}</p>
+                        <div className="card-footer">
+                          <span className="card-footer-label">View services</span>
+                          <span className="card-count-arrow">→</span>
+                        </div>
                       </div>
-                    </div>
-                  </button>
-                ))}
+                    </button>
+                  );
+                })}
               </div>
 
               {/* ── Testimonials ── */}
@@ -212,7 +245,19 @@ export default function SalonMenu() {
                             </div>
                           )}
                           <div className="service-card-body">
-                            <div className="service-name">{svc.name}</div>
+                            <div className="service-name-row">
+                              <div className="service-name">{svc.name}</div>
+                              <button
+                                className="service-share-btn"
+                                aria-label={`Share ${svc.name}`}
+                                onClick={(e) => shareService(svc.name, svc.price, e)}
+                              >
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                  <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+                                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                                </svg>
+                              </button>
+                            </div>
                             {svc.description && <div className="service-desc">{svc.description}</div>}
                             <div className="service-card-footer">
                               {svc.duration && (

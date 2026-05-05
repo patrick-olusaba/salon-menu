@@ -4,10 +4,76 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>salon-menu</title>
+    <title>Master Stylists Salon & Barbershop</title>
+    <!-- Apply saved theme before paint to avoid flash -->
+    <script>
+      (function() {
+        var t = localStorage.getItem('theme');
+        if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
+      })();
+    </script>
+    <style>
+      #site-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: #0a0a0b;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+      }
+      [data-theme="light"] #site-loader { background: #f8f5f0; }
+      #site-loader.hidden { opacity: 0; visibility: hidden; }
+      #site-loader img {
+        width: 140px;
+        height: 140px;
+        object-fit: contain;
+        animation: loader-pulse 1.6s ease-in-out infinite;
+      }
+      #site-loader .loader-ring {
+        width: 40px;
+        height: 40px;
+        border: 2px solid rgba(184,150,90,0.2);
+        border-top-color: #b8965a;
+        border-radius: 50%;
+        animation: loader-spin 0.9s linear infinite;
+      }
+      @keyframes loader-pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50%       { opacity: 0.7; transform: scale(0.95); }
+      }
+      @keyframes loader-spin { to { transform: rotate(360deg); } }
+    </style>
   </head>
   <body>
+    <div id="site-loader">
+      <img src="/logo.png" alt="Master Stylists" />
+      <div class="loader-ring"></div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      window.addEventListener('load', function () {
+        // Wait for all images on the page to finish loading too
+        var images = Array.from(document.images);
+        var pending = images.filter(function (img) { return !img.complete; });
+        function dismiss() {
+          var loader = document.getElementById('site-loader');
+          if (loader) {
+            loader.classList.add('hidden');
+            setTimeout(function () { loader.remove(); }, 500);
+          }
+        }
+        if (pending.length === 0) { dismiss(); return; }
+        var loaded = 0;
+        pending.forEach(function (img) {
+          img.addEventListener('load',  function () { if (++loaded >= pending.length) dismiss(); });
+          img.addEventListener('error', function () { if (++loaded >= pending.length) dismiss(); });
+        });
+      });
+    </script>
   </body>
 </html>

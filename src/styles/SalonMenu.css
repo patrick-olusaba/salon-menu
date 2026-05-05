@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap');
 
 /* ─── Focus Visible (accessibility) ────────────────────────── */
 :focus-visible {
@@ -29,6 +29,36 @@
   --transition: 0.24s cubic-bezier(0.4,0,0.2,1);
 }
 
+[data-theme="light"] {
+  --bg:          #f8f5f0;
+  --bg-card:     #ffffff;
+  --bg-hover:    #f0ebe3;
+  --border:      rgba(0,0,0,0.08);
+  --border-mid:  rgba(0,0,0,0.14);
+  --text-primary:   #1a1612;
+  --text-secondary: #5a4e44;
+  --text-muted:     #9a8e84;
+}
+
+/* theme toggle button */
+.theme-toggle {
+  width: 36px; height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+.theme-toggle:hover {
+  color: var(--gold);
+  border-color: var(--gold-border);
+  background: var(--gold-dim);
+}
+.theme-toggle svg { width: 18px; height: 18px; display: block; pointer-events: none; }
+
 .salon-root {
   min-height: 100vh;
   background: var(--bg);
@@ -42,7 +72,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(10,10,11,0.90);
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
@@ -267,10 +297,10 @@
   display: inline-flex;
   align-items: center;
   background: transparent;
-  color: var(--text-primary);
+  color: #fff;
   padding: 13px 28px;
   border-radius: 6px;
-  border: 1px solid rgba(255,255,255,0.3);
+  border: 1px solid rgba(255,255,255,0.5);
   text-decoration: none;
   font-size: 12px;
   font-weight: 500;
@@ -814,7 +844,7 @@
 .footer {
   border-top: 1px solid var(--border);
   padding: 60px 2.5rem;
-  background: #080809;
+  background: var(--bg);
 }
 
 .footer-inner { max-width: 1280px; margin: 0 auto; }
@@ -975,7 +1005,7 @@ a.footer-col-item:hover { color: var(--text-secondary); }
   display: flex;
   flex-direction: column;
   border-top: 1px solid var(--border);
-  background: rgba(10,10,11,0.98);
+  background: color-mix(in srgb, var(--bg) 98%, transparent);
   padding: 8px 0 16px;
 }
 
@@ -1436,4 +1466,49 @@ a.service-card {
 
 a.service-card:hover .service-book-hint {
   color: #1ebe5d;
+}
+
+/* ─── Card duration badge ────────────────────────────────────── */
+.card-duration {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  align-self: center;
+}
+
+/* ─── Service name row + share button ───────────────────────── */
+.service-name-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.service-share-btn {
+  flex-shrink: 0;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+  line-height: 1;
+}
+
+.service-share-btn svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+  pointer-events: none;
+}
+
+.service-share-btn:hover {
+  color: var(--gold);
+  border-color: var(--gold-border);
+  background: var(--gold-dim);
 }
